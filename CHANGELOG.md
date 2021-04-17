@@ -1,3 +1,25 @@
+## [6.0.0]
+Released 16 April 2021
+### Breaking Changes
+- Increased the version of the num-complex dependency to 0.4.
+    - This is a breaking change because we have a public dependency on num-complex.
+    - See the [num-complex changelog](https://github.com/rust-num/num-complex/blob/master/RELEASES.md) for a list of breaking changes in num-complex 0.4
+    - As a high-level summary, most users will not need to do anything to upgrade to RustFFT 6.0: num-complex 0.4 re-exports a newer version of `rand`, and that's num-complex's only documented breaking change.
+
+## [5.1.0]
+Released 16 April 2021
+### Added
+ - Implemented a code path for SSE-optimized FFTs (Thanks to Henrik Enquist!) (#60)
+     - Plan a FFT using the `FftPlanner` (or the new `FftPlannerSse`) on a machine that supports SSE4.1 (but not AVX) and you'll see a 2-3x performance improvement over the default scalar code.
+### Fixed
+ - Fixed underflow when planning an AVX FFT of size zero (#56)
+ - Fixed the FFT planner not being Send, due to internal use of Rc<> (#55)
+ - Fixed typo in documentation (#54)
+ - Slightly improved numerical precision of Rader's Algorithm and Bluestein's Algorithm (#66, #68)
+ - Minor optimizations to Rader's Algorithm and Bluestein's Algorithm (#59)
+ - Minor optimizations to MixedRadix setup time (#57)
+ - Optimized performance of Radix4 (#65)
+
 ## [5.0.1]
 Released 8 January 2021
 ### Fixed
